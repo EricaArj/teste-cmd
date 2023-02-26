@@ -8,6 +8,8 @@ import show.model.Cadastro;
 import show.model.ListaCamarote;
 import show.model.ReservaCamarote;
 
+
+
 public class ShowController implements ShowRepository {
 	
 	Scanner leia = new Scanner(System.in);
@@ -22,7 +24,24 @@ public class ShowController implements ShowRepository {
 	
 	
 	
-	
+	 
+    public boolean autenticar(String telefone, String senha) {
+        for (Cadastro cadastro : cadastrarUsuario) {
+            if (cadastro.getTelefone().equals(telefone) && cadastro.getSenha().equals(senha)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Cadastro buscarNaCollection(String telefone) {
+		for (var cadastro : cadastrarUsuario) {
+			if (cadastro.getTelefone() == telefone)
+				return cadastro;
+		}
+
+		return null;
+
+	}
 	
 	
 	@Override
@@ -104,12 +123,7 @@ public class ShowController implements ShowRepository {
 		
 	
 	
-	public void login() {
-		
-		//Logar no sisitema apenas quando já cadastrado
-		
-		
-	}
+	
 	
 
 

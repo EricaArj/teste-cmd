@@ -34,39 +34,39 @@ public class Menu {
 		LocalDate dataNascimento;
 		
 
-		while (true) {
+		int  tipoSexo, idade;
+	    
+	    while (true) {
+	    	
+	    	System.out.println("--------------------------------\n");
+			System.out.println("Bem-vindo ao sistema de RESERVA!");
+			System.out.println("______________MENU_______________\n");
+			System.out.println("	Escolha uma opção:		");
+			System.out.println("	1- CRIAR CADASTRO    	");
+			System.out.println("	2- LOGIN				");
+			System.out.println("	3- VISUALIZAR CADASTRO	");
+			System.out.println("	4- BUSCAR CADASTRO		");
+			System.out.println("	5- Cliente(PACOTE)		");
+			System.out.println("	6- APAGAR CLIENTE		");
+			System.out.println("	7- CONSULTAR (CAMAROTE)	");			
+			System.out.println("	0 - Sair				");
+			System.out.println("__________________________________\n");
+			System.out.println("Entre com a opção desejada:      ");
+			System.out.println("			  					");
 
-			System.out.println("#################################################################");
-			System.out.println("#################################################################");
-			System.out.println("																 ");
-			System.out.println("																 ");
-			System.out.println("				MENU 											 ");
-			System.out.println("																 ");
-			System.out.println("																 ");
-			System.out.println("#################################################################");
-			System.out.println("#################################################################");
-			System.out.println("			1- CADASTRO											 ");
-			System.out.println("			2- LOGIN											 ");
-			System.out.println("			3- VISUALIZAR CADASTRO								 ");
-			System.out.println("			4- cliente(PACOTE)									 ");
-			System.out.println("			5- APAGAR cliente									 ");
-			System.out.println("			6- CONSULTAR cliente								 ");			
-			System.out.println(" 			0- SAIR						                     	 ");
-			System.out.println("#################################################################");
-			System.out.println("#################################################################");
-			System.out.println("Entre com a opção desejada:      								 ");
-			System.out.println("			  													 ");
-
+			int opcao1;
+			
 			try {
-				opcao = leia.nextInt();
+				opcao1 = leia.nextInt();
 			}catch(InputMismatchException e) {
 				System.out.println("Digite valores inteiros de 0 a 6! ");
 				leia.nextLine();
-				opcao = 0;
+				opcao1 = 0;
 				
 			}
 
-			if (opcao == 0) {
+
+			if (opcao1 == 0) {
 
 				System.out.println("#####################################################################");
 				System.out.println("\n  		CMD - RELIZAMOS OS SEUS SONHOS						 	 ");
@@ -76,30 +76,96 @@ public class Menu {
 				System.exit(0);
 
 			}
-			switch (opcao) {
+			switch (opcao1) {
 			case 1:
-				System.out.println("Cadastro \n\n");
-				
-		        System.out.println("Realizando cadastro...");
-		        System.out.println("Digite o Email:");
-//		        String email = leia.nextLine();
-		        System.out.println("Digite a senha:");
-//		        String senha = leia.nextLine();		
-				
-				
-		        keyPress();
-				break;
-			case 2:
-				System.out.println("Login \n\n");
-				System.out.println("Informe seu email: ");
+				System.out.println("Criar Cadastro \n\n");
+
+				System.out.println("Realizando cadastro...");
+				System.out.print("Informe seu nome: ");
 				leia.skip("\\R?");
-				email = leia.nextLine();
-				
-				System.out.println("Informe sua senha: ");
+				nome = leia.nextLine();
+
+				System.out.print("Senha: ");
+				leia.skip("\\R?");
 				senha = leia.nextLine();
-				
+				System.out.print("\n");
+
+				System.out.println("CPF: ");
+				leia.skip("\\R?");
+				cpf = leia.nextLine();
+
+				System.out.println("Informe o Sexo ");
+
+				do {
+					System.out.println("Sexo -> (1-Mulher | 2-Homem | 3-Outros): ");
+					tipoSexo = leia.nextInt();
+				} while (tipoSexo < 1 && tipoSexo > 3);
+
+				switch (tipoSexo) {
+				case 1 -> {
+					System.out.println("Mulheres tem direito de descontos de 20%");
+
+//					limite = leia.nextFloat();
+//					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
+
+				}
+				case 2 -> {
+					System.out.println("Homem ");
+//					aniversario = leia.nextInt();
+//					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+				}
+				case 3 -> {
+					System.out.println("Outros: ");
+
+//					aniversario = leia.nextInt();
+//					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+
+				}
+				}
+
+				System.out.println("Digite seu telefone/celular: ");
+				leia.skip("\\R?");
+				telefone = leia.nextLine();
+
+				System.out.println("Qual sua idade: ");
+				leia.skip("\\R?");
+				idade = leia.nextInt();
+				if (idade >= 18) {
+					System.out.println("Seja bem vindo(a)!");
+
+				} else {
+					System.out.println("Desculpa! Menores de idade não é possivel parcicipar");
+					break;
+				}
+
 				keyPress();
 				break;
+			case 2:
+				System.out.print("------------------------------\n");
+				System.out.println("Realizando Login...");
+				
+				System.out.print("------------------------------\n");
+				
+		        System.out.print("Digite o seu Email: ");
+		        String emaillogin = leia.next();
+		        System.out.print("\nSenha: ");
+		        String senhalogin = leia.next();
+		        
+		        boolean login = cliente.autenticar(emaillogin,senhalogin);
+		        
+		        if (login) {
+		        	System.out.print("------------------------------\n");
+		            System.out.println("\nAutenticado com sucesso!");
+		            System.out.print("------------------------------\n");
+		            // Código para redirecionar o usuário para a página principal
+		        } else {
+		        	System.out.print("------------------------------");
+		            System.out.println("\nNome de usuário ou senha inválidos!");
+		            System.out.print("------------------------------");
+		            // Código para exibir uma mensagem de erro ao usuário
+		        }
+		        keyPress();
+				 break;
 			case 3:
 				System.out.println("cliente(Pacote)\n\n");
 
