@@ -14,13 +14,14 @@ public class Menu {
 		
 		Scanner leia = new Scanner(System.in);
 		ShowController cliente = new ShowController();
+		Cadastro clienteLogado = new Cadastro ("", "", "", 0, "", "", "");
 		
-		//Cadastro c1 = new Cadastro(1, "Brian Schneider de Lima", "R1p4rT3ex", "123.456.789-01", "Masculino", "(11)98765-4321", LocalDate.of(1994, 10, 6), "brian@generation.com");
+		Cadastro c1 = new Cadastro(1, "Brian Schneider de Lima", "R1p4rT3ex", "123.456.789-01", "Masculino", "(11)98765-4321", LocalDate.of(1994, 10, 6), "brian@generation.com");
 //		Cadastro c2 = new Cadastro(2, "Vinicius Prazeres", "E#30y0@*", "987.654.321-10", "Masculino", "(11)91234-5678", LocalDate.of(1995, 5, 13), "vprazeres@generation.com");
 //		Cadastro c3 = new Cadastro(3, "Erica Araújo da silva Oliveira", "m5R&8t5h", "444.333.55-22", "Feminino", "(11)98237-4765", LocalDate.of(1997, 8, 24), "ericaraujo@generation.com");
 //		Cadastro c4 = new Cadastro(4, "Jennifer Cruz", "%0p%L52%", "842.632.919-87", "Feminino", "(11)98888-7777", LocalDate.of(1997, 11, 16), "jennifercruz@generation.com");
 		
-		//cliente.cadastrar(c1);
+		cliente.cadastrar(c1);
 //		cliente.cadastrar(c2);
 //		cliente.cadastrar(c3);
 //		cliente.cadastrar(c4);
@@ -30,7 +31,7 @@ public class Menu {
 		int opcao, numCam, pacote;
 		
 		long id;
-		String nome,nomeCad, senha,senhaCad, cpf,cpfCad,sexo, telefone,telefoneCad, email,emailbuscar,emailAtu,dataNaCad,EmailCad;
+		String nome,nomeCad, senha,senhaCad, cpf,cpfCad,sexo, telefone,telefoneCad, email,emailbuscar=null,emailAtu,dataN,emailCad;
 		
 		
 
@@ -65,13 +66,12 @@ public class Menu {
 			System.out.println("	 1- LOGIN		    	");
 			System.out.println("	 2- CRIAR CADASTRO		");
 			System.out.println("	 3- LISTA CADASTROS		");
-			System.out.println("	 4- BUSCAR CADASTRO		");
-			System.out.println("	 5- ATUALIZAR CADASTRO	");
-			System.out.println("	 6- RESERVA(CAMAROTE)	");
-			System.out.println("	 7- LISTA(RESERVAS)		");
-			System.out.println("	 8- CONSULTAR(CAMAROTE)	");
-			System.out.println("	 9- EXCLUIR(RESERVA)	");
-			System.out.println("	10- EXCLUIR CADASTRO	");
+			System.out.println("	 4- ATUALIZAR CADASTRO	");
+			System.out.println("	 5- RESERVA(CAMAROTE)	");
+			System.out.println("	 6- LISTA(RESERVAS)		");
+			System.out.println("	 7- CONSULTAR(CAMAROTE)	");
+			System.out.println("	 8- EXCLUIR(RESERVA)	");
+			System.out.println("	 9- EXCLUIR CADASTRO	");
 			System.out.println("	 0- Sair				");
 			System.out.println("__________________________________\n");
 			System.out.println("Entre com a opção desejada:      ");
@@ -118,6 +118,7 @@ public class Menu {
 		            System.out.println("\nAutenticado com sucesso!");
 		            System.out.print("------------------------------\n");
 		            // Código para redirecionar o usuário para a página principal
+		            clienteLogado = cliente.retornaLogado(emaillogin, senhalogin);
 		        } else {
 		        	System.out.print("------------------------------");
 		            System.out.println("\nEmail ou senha inválidos!");
@@ -125,9 +126,9 @@ public class Menu {
 		            System.out.println("\n E Tenta Novamente!");
 		            System.out.print("------------------------------");
 		            // Código para exibir uma mensagem de erro ao usuário
+		            
 		        }
 		        
-		        cliente.autenticar(emaillogin,senhalogin);
 		        keyPress();
 				 break;
 				
@@ -177,19 +178,24 @@ public class Menu {
 //					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 
 				}
+				
 				}
-
 				System.out.println("Digite seu telefone/celular: ");
 				leia.skip("\\R?");
 				telefoneCad = leia.nextLine();
 				
-				System.out.println("Digite sua Data de Nascimento: ");
-				dataNaCad = leia.nextLine();
+				System.out.print("Entre com a data de nascimento DD/MM/AAAA formatada: ");
 				
-				cliente.dataNascimento(dataNaCad);
-
 			
+				dataN = leia.nextLine();
 				
+				cliente.dataNascimento(dataN);
+				System.out.print("Email: ");
+				leia.skip("\\R?");
+				emailCad = leia.nextLine();
+				
+
+				 cliente.cadastrar(new Cadastro(nomeCad,senhaCad,cpfCad,tipoSexoCad,telefoneCad,dataN,emailCad));
        
 				keyPress();
 				break;
@@ -201,101 +207,82 @@ public class Menu {
 				cliente.listarCadastro();
 				
 				break;
+			
 			case 4:
-				System.out.print("------------------------------\n");
-				System.out.println("BUSCAR CADASTRO\n\n");
-				System.out.print("------------------------------\n");
-				
-				System.out.println("Consultar dados de Cadastro por (Email)\n\n");
-				System.out.print("------------------------------\n");
-
-				System.out.println("Digite o seu Email: ");
-				
-				System.out.print("------------------------------\n");
-				leia.skip("\\R?");
-				emailbuscar = leia.nextLine();
-				
-				cliente.procurarPorEmail(emailbuscar);
-
-				keyPress();
-				break;
-			case 5:
 				
 				System.out.print("------------------------------\n");
 				System.out.println("ATUALIZAR CADASTRO\n\n");
 				System.out.print("------------------------------\n");
 				System.out.println("Atualizar dados da Conta\n\n");
 
-				System.out.println("Informe seu nome: ");
+				System.out.print("------------------------------\n");
+				System.out.println("Criar Cadastro \n\n");
+				System.out.print("------------------------------\n");
+				System.out.println("Realizando cadastro...");
+				System.out.print("------------------------------\n");
+				System.out.print("Informe seu nome: ");
 				leia.skip("\\R?");
-				emailAtu = leia.nextLine();
+				nome = leia.nextLine();
 
-				if (cliente.buscarNaCollection(emailAtu) != null) {
+				System.out.print("Senha: ");
+				leia.skip("\\R?");
+				senha = leia.nextLine();
+				System.out.print("\n");
 
-					System.out.println("Informe seu Nome:: ");
-					leia.skip("\\R?");
-					nome = leia.nextLine();
+				System.out.println("CPF: ");
+				leia.skip("\\R?");
+				cpf = leia.nextLine();
 
-					System.out.println("Senha: ");
-					leia.skip("\\R?");
-					senha = leia.nextLine();
+				System.out.println("Informe o Sexo ");
 
-					System.out.println("Informe seu numero CPF: ");
-					cpf = leia.nextLine();
-					
-					
-					System.out.println(" Informe o Sexo: ");
+				do {
+					System.out.println("Sexo -> (1-Mulher | 2-Homem | 3-Outros): ");
+					tipoSexo = leia.nextInt();
+				} while (tipoSexo < 1 && tipoSexo> 3);
 
-					do {
-						System.out.println("Sexo -> (1-Mulher | 2-Homem | 3-Outros): ");
-						tipoSexo = leia.nextInt();
-					} while (tipoSexo < 1 && tipoSexo > 3);
+				switch (tipoSexo) {
+				case 1 -> {
+					System.out.println("Mulheres tem direito de descontos de 20%");
 
-					switch (tipoSexo) {
-					case 1 -> {
-						System.out.println("Mulheres tem direito de descontos de 20%");
+//					limite = leia.nextFloat();
+//					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
 
-//						limite = leia.nextFloat();
-//						contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
+				}
+				case 2 -> {
+					System.out.println("Homem ");
+//					aniversario = leia.nextInt();
+//					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+				}
+				case 3 -> {
+					System.out.println("Outros: ");
 
-					}
-					case 2 -> {
-						System.out.println("Homem ");
-//						aniversario = leia.nextInt();
-//						contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
-					}
-					case 3 -> {
-						System.out.println("Outros: ");
+//					aniversario = leia.nextInt();
+//					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 
-//						aniversario = leia.nextInt();
-//						contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+				}
+				
+				}
+				System.out.println("Digite seu telefone/celular: ");
+				leia.skip("\\R?");
+				telefone = leia.nextLine();
+				
+				System.out.print("Entre com a data de nascimento DD/MM/AAAA formatada: ");
+				
+			
+				dataN = leia.nextLine();
+				
+				cliente.dataNascimento(dataN);
+				System.out.print("Email: ");
+				leia.skip("\\R?");
+				emailCad = leia.nextLine();
+				
 
-					}
-					}
+				 cliente.cadastrar(new Cadastro(nome,senha,cpf,tipoSexo,telefone,dataN,email));
+       
+				keyPress();
+				break;
 
-					System.out.println("Digite seu telefone/celular: ");
-					leia.skip("\\R?");
-					telefone = leia.nextLine();
-
-					//if (dataNaCad >= 18) {
-						//System.out.println("Seja bem vindo(a)!");
-
-					//} else {
-						//System.out.println("Desculpa! Menores de idade não é possivel parcicipar");
-						//break;
-					//}
-					// public Cadastro(String nome, String senha, String cpf, int tipoSexo, String telefone, String dataNascimento,
-					//String email) {
-	              // cliente.cadastrar(new Cadastro(nome,senha,cpf,tipoSexo,telefone,dataNaCad,EmailCad));
-					//keyPress();
-					
-					////} else
-					//System.out.println("O Cadastro não foi encontrada!");
-
-				//keyPress();
-				//break;
-
-			case 6:
+			case 5:
 				System.out.print("------------------------------\n");
 				System.out.println("RESERVA(CAMAROTE)\n\n");
 				System.out.print("------------------------------\n");
@@ -329,36 +316,36 @@ public class Menu {
 				
 				
 				break;
-			case 7:
+			case 6:
 				System.out.print("------------------------------\n");
 				System.out.println("LISTA(RESERVAS)\n\n");
 				System.out.print("------------------------------\n");
 				cliente.listarTodas();
 				
 				break;
-			case 8:
+			case 7:
 				System.out.print("------------------------------\n");
 				System.out.println("CONSULTAR(CAMAROTE)\n\n");
 				System.out.print("------------------------------\n");
 				
 				
 				break;
-			case 9:
+			case 8:
 				System.out.print("------------------------------\n");
 				System.out.println("EXCLUIR(RESERVA)\n\n");
 				System.out.print("------------------------------\n");
 				
 				
 				break;
-			case 10:
+			case 9:
 				System.out.print("------------------------------\n");
 				System.out.println("EXCLUIR(CADASTRO)\n\n");
 				System.out.print("------------------------------\n");
-				System.out.println("Apagar a Cadastro\n\n");
+				System.out.println("Excluir Cadastro\n\n");
 
 				System.out.println("Informe Email: ");
 				email = leia.nextLine();
-
+				
 				cliente.deletar(email);
 
 				keyPress();

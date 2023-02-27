@@ -31,28 +31,17 @@ public class ShowController implements ShowRepository {
 	
 	public boolean autenticar(String email, String senha) {
         for (Cadastro cadastro : cadastrarUsuario) {
-            if (cadastro.getTelefone().equals(email) && cadastro.getSenha().equals(senha)) {
+            if (cadastro.getEmail().equals(email) && cadastro.getSenha().equals(senha)) {
                 return true;
             }
         }
         return false;
     }
-    public Cadastro buscarNaCollection(String email) {
-		for (var cadastro : cadastrarUsuario) {
-			if (cadastro.getTelefone() == email)
-				return cadastro;
-		}
-
-		return null;
-    }
+   
 		
-    public Cadastro dataNascimento(String data) {
+    public Cadastro dataNascimento(String dataN) {
 		try {	
-			System.out.print("Entre com a data de nascimento DD/MM/AAAA formatada: ");
-			Scanner scanner = new Scanner(System.in);
-		
-			String dataN = scanner.nextLine();
-			scanner.close();
+			
 			
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
 			
@@ -60,9 +49,14 @@ public class ShowController implements ShowRepository {
 			
 			
 			// prints the age
-			System.out.println("Você tem " + calculateAge(dob) + " anos de idade");
+			System.out.println("Você tem " + calculateAge(dob) + " Data Nascimento!");
 	}catch (DateTimeParseException e) {
-		System.out.println("Informe a data de acordo com o exemplo {DD/MM/AAAA}!");
+			int para = 0;
+			System.out.println("Informe a data de acordo com o exemplo {DD/MM/AAAA}!");
+			//System.exit(para);
+			
+			
+			
 	}
 		return null;
 	
@@ -76,6 +70,7 @@ public class ShowController implements ShowRepository {
 		} else {
 			return 0;
 		}
+		
 	}
 		
     public void listarCadastro() {
@@ -94,6 +89,7 @@ public class ShowController implements ShowRepository {
 			System.out.println("O Cadastro do Email: " + email + " não foi encontrada!");
 	}
     
+    
     public void deletar(String email) {
 		var cadastro = buscarNaCollection(email);
 
@@ -105,6 +101,14 @@ public class ShowController implements ShowRepository {
 
 	}
     
+    public Cadastro buscarNaCollection(String email) {
+		for (var cadastro : cadastrarUsuario) {
+			if (cadastro.getEmail() == email)
+				return cadastro;
+		}
+
+		return null;
+    }
     
 	@Override
 	public void listarTodas() {
@@ -119,6 +123,15 @@ public class ShowController implements ShowRepository {
 		 cadastrarUsuario.add(cadastro);
 			//System.out.println("Cadastro Realizado com Sucesso!");
 		}
+	@Override
+	public Cadastro retornaLogado(String email, String senha) {
+        for (Cadastro cadastro : cadastrarUsuario) {
+            if (cadastro.getEmail().equals(email) && cadastro.getSenha().equals(senha)) {
+                return cadastro;
+            }
+        }
+        return null;
+    }
 	
 	@Override
 	public void criarCamarotes(int n) {
