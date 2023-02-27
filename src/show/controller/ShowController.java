@@ -1,5 +1,9 @@
 package show.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,8 +44,40 @@ public class ShowController implements ShowRepository {
 		}
 
 		return null;
-
+    }
+		
+    public Cadastro dataNascimento(String data) {
+		try {	
+			System.out.print("Entre com a data de nascimento DD/MM/AAAA formatada: ");
+			Scanner scanner = new Scanner(System.in);
+		
+			String dataN = scanner.nextLine();
+			scanner.close();
+			
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+			
+			LocalDate dob = LocalDate.parse(dataN, format);
+			
+			
+			// prints the age
+			System.out.println("Você tem " + calculateAge(dob) + " anos de idade");
+	}catch (DateTimeParseException e) {
+		System.out.println("Informe a data de acordo com o exemplo {DD/MM/AAAA}!");
 	}
+		return null;
+	
+}
+
+	public static int calculateAge(LocalDate dob) {
+
+		LocalDate curDate = LocalDate.now();
+		if ((dob != null) && (curDate != null)) {
+			return Period.between(dob, curDate).getYears();
+		} else {
+			return 0;
+		}
+	}
+		
     public void listarCadastro() {
 		for (var cadastro : cadastrarUsuario)
 			cadastro.visualizar();
@@ -49,8 +85,7 @@ public class ShowController implements ShowRepository {
 		
 	}
     
-    @Override
-	public void procurarPorEmail(String email) {
+    public void procurarPorEmail(String email) {
 		var cadastro = buscarNaCollection(email);
 
 		if (cadastro != null)

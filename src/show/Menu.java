@@ -15,12 +15,12 @@ public class Menu {
 		Scanner leia = new Scanner(System.in);
 		ShowController cliente = new ShowController();
 		
-//		Cadastro c1 = new Cadastro(1, "Brian Schneider de Lima", "R1p4rT3ex", "123.456.789-01", "Masculino", "(11)98765-4321", LocalDate.of(1994, 10, 6), "brian@generation.com");
+		//Cadastro c1 = new Cadastro(1, "Brian Schneider de Lima", "R1p4rT3ex", "123.456.789-01", "Masculino", "(11)98765-4321", LocalDate.of(1994, 10, 6), "brian@generation.com");
 //		Cadastro c2 = new Cadastro(2, "Vinicius Prazeres", "E#30y0@*", "987.654.321-10", "Masculino", "(11)91234-5678", LocalDate.of(1995, 5, 13), "vprazeres@generation.com");
 //		Cadastro c3 = new Cadastro(3, "Erica Araújo da silva Oliveira", "m5R&8t5h", "444.333.55-22", "Feminino", "(11)98237-4765", LocalDate.of(1997, 8, 24), "ericaraujo@generation.com");
 //		Cadastro c4 = new Cadastro(4, "Jennifer Cruz", "%0p%L52%", "842.632.919-87", "Feminino", "(11)98888-7777", LocalDate.of(1997, 11, 16), "jennifercruz@generation.com");
 		
-//		cliente.cadastrar(c1);
+		//cliente.cadastrar(c1);
 //		cliente.cadastrar(c2);
 //		cliente.cadastrar(c3);
 //		cliente.cadastrar(c4);
@@ -30,11 +30,11 @@ public class Menu {
 		int opcao, numCam, pacote;
 		
 		long id;
-		String nome, senha, cpf, sexo, telefone, email,emailbuscar,emailAtu;
-		LocalDate dataNascimento;
+		String nome,nomeCad, senha,senhaCad, cpf,cpfCad,sexo, telefone,telefoneCad, email,emailbuscar,emailAtu,dataNaCad,EmailCad;
+		
 		
 
-		int  tipoSexo, idade;
+		int  tipoSexo,tipoSexoCad, idade;
 	    
 	    while (true) {
 	    	
@@ -106,12 +106,12 @@ public class Menu {
 				
 				System.out.print("------------------------------\n");
 				
-		        System.out.print("Digite o seu Telefone: ");
-		        String telefonelogin = leia.next();
+		        System.out.print("Digite o seu Email: ");
+		        String emaillogin = leia.next();
 		        System.out.print("\nSenha: ");
 		        String senhalogin = leia.next();
 		        
-		        boolean login = cliente.autenticar(telefonelogin,senhalogin);
+		        boolean login = cliente.autenticar(emaillogin,senhalogin);
 		        
 		        if (login) {
 		        	System.out.print("------------------------------\n");
@@ -120,10 +120,14 @@ public class Menu {
 		            // Código para redirecionar o usuário para a página principal
 		        } else {
 		        	System.out.print("------------------------------");
-		            System.out.println("\nNome de usuário ou senha inválidos!");
+		            System.out.println("\nEmail ou senha inválidos!");
+		            System.out.println("\n Faça o seu Cadastro Primeiro");
+		            System.out.println("\n E Tenta Novamente!");
 		            System.out.print("------------------------------");
 		            // Código para exibir uma mensagem de erro ao usuário
 		        }
+		        
+		        cliente.autenticar(emaillogin,senhalogin);
 		        keyPress();
 				 break;
 				
@@ -135,25 +139,25 @@ public class Menu {
 				System.out.print("------------------------------\n");
 				System.out.print("Informe seu nome: ");
 				leia.skip("\\R?");
-				nome = leia.nextLine();
+				nomeCad = leia.nextLine();
 
 				System.out.print("Senha: ");
 				leia.skip("\\R?");
-				senha = leia.nextLine();
+				senhaCad = leia.nextLine();
 				System.out.print("\n");
 
 				System.out.println("CPF: ");
 				leia.skip("\\R?");
-				cpf = leia.nextLine();
+				cpfCad = leia.nextLine();
 
 				System.out.println("Informe o Sexo ");
 
 				do {
 					System.out.println("Sexo -> (1-Mulher | 2-Homem | 3-Outros): ");
-					tipoSexo = leia.nextInt();
-				} while (tipoSexo < 1 && tipoSexo > 3);
+					tipoSexoCad = leia.nextInt();
+				} while (tipoSexoCad < 1 && tipoSexoCad> 3);
 
-				switch (tipoSexo) {
+				switch (tipoSexoCad) {
 				case 1 -> {
 					System.out.println("Mulheres tem direito de descontos de 20%");
 
@@ -177,26 +181,25 @@ public class Menu {
 
 				System.out.println("Digite seu telefone/celular: ");
 				leia.skip("\\R?");
-				telefone = leia.nextLine();
+				telefoneCad = leia.nextLine();
+				
+				System.out.println("Digite sua Data de Nascimento: ");
+				dataNaCad = leia.nextLine();
+				
+				cliente.dataNascimento(dataNaCad);
 
-				System.out.println("Qual sua idade: ");
-				leia.skip("\\R?");
-				idade = leia.nextInt();
-				if (idade >= 18) {
-					System.out.println("Seja bem vindo(a)!");
-
-				} else {
-					System.out.println("Desculpa! Menores de idade não é possivel parcicipar");
-					break;
-				}
-               cliente.cadastrar(new Cadastro(nome,senha,cpf,tipoSexo,telefone,idade));
+			
+				
+       
 				keyPress();
 				break;
 			case 3:
 				System.out.print("------------------------------\n");
 				System.out.println("LISTA DE CADASTRO ");
 				System.out.print("------------------------------\n");
+				
 				cliente.listarCadastro();
+				
 				break;
 			case 4:
 				System.out.print("------------------------------\n");
@@ -274,24 +277,23 @@ public class Menu {
 					leia.skip("\\R?");
 					telefone = leia.nextLine();
 
-					System.out.println("Qual sua idade: ");
-					leia.skip("\\R?");
-					idade = leia.nextInt();
-					if (idade >= 18) {
-						System.out.println("Seja bem vindo(a)!");
+					//if (dataNaCad >= 18) {
+						//System.out.println("Seja bem vindo(a)!");
 
-					} else {
-						System.out.println("Desculpa! Menores de idade não é possivel parcicipar");
-						break;
-					}
-	               cliente.cadastrar(new Cadastro(nome,senha,cpf,tipoSexo,telefone,idade));
-					keyPress();
+					//} else {
+						//System.out.println("Desculpa! Menores de idade não é possivel parcicipar");
+						//break;
+					//}
+					// public Cadastro(String nome, String senha, String cpf, int tipoSexo, String telefone, String dataNascimento,
+					//String email) {
+	              // cliente.cadastrar(new Cadastro(nome,senha,cpf,tipoSexo,telefone,dataNaCad,EmailCad));
+					//keyPress();
 					
-					} else
-					System.out.println("O Cadastro não foi encontrada!");
+					////} else
+					//System.out.println("O Cadastro não foi encontrada!");
 
-				keyPress();
-				break;
+				//keyPress();
+				//break;
 
 			case 6:
 				System.out.print("------------------------------\n");
