@@ -10,6 +10,7 @@ import show.model.ReservaCamarote;
 
 
 
+
 public class ShowController implements ShowRepository {
 	
 	Scanner leia = new Scanner(System.in);
@@ -24,26 +25,52 @@ public class ShowController implements ShowRepository {
 	
 	
 	
-	 
-    public boolean autenticar(String telefone, String senha) {
+	public boolean autenticar(String email, String senha) {
         for (Cadastro cadastro : cadastrarUsuario) {
-            if (cadastro.getTelefone().equals(telefone) && cadastro.getSenha().equals(senha)) {
+            if (cadastro.getTelefone().equals(email) && cadastro.getSenha().equals(senha)) {
                 return true;
             }
         }
         return false;
     }
-    public Cadastro buscarNaCollection(String telefone) {
+    public Cadastro buscarNaCollection(String email) {
 		for (var cadastro : cadastrarUsuario) {
-			if (cadastro.getTelefone() == telefone)
+			if (cadastro.getTelefone() == email)
 				return cadastro;
 		}
 
 		return null;
 
 	}
-	
-	
+    public void listarCadastro() {
+		for (var cadastro : cadastrarUsuario)
+			cadastro.visualizar();
+		//Listar a Cadastro para o usuário
+		
+	}
+    
+    @Override
+	public void procurarPorEmail(String email) {
+		var cadastro = buscarNaCollection(email);
+
+		if (cadastro != null)
+			cadastro.visualizar();
+		else
+			System.out.println("O Cadastro do Email: " + email + " não foi encontrada!");
+	}
+    
+    public void deletar(String email) {
+		var cadastro = buscarNaCollection(email);
+
+		if (cadastro != null) {
+			if (cadastrarUsuario.remove(cadastro) == true)
+				System.out.println("O Cadastro do Email: " + email + " foi excluído!");
+		} else
+			System.out.println("O Cadastro do Email: " + email + " não foi encontrada!");
+
+	}
+    
+    
 	@Override
 	public void listarTodas() {
 		for (var reserva : listaReserva)
@@ -53,12 +80,10 @@ public class ShowController implements ShowRepository {
 	}
 	
 	@Override
-	public void cadastrar(Cadastro cadastro) {
-		
-		cadastrarUsuario.add(cadastro);
-		System.out.println("Cadastro Realizado com Sucesso.");
-		
-	}
+	 public void cadastrar(Cadastro cadastro) {
+		 cadastrarUsuario.add(cadastro);
+			//System.out.println("Cadastro Realizado com Sucesso!");
+		}
 	
 	@Override
 	public void criarCamarotes(int n) {
@@ -118,6 +143,11 @@ public class ShowController implements ShowRepository {
 		} while(confirmar == 'n' || confirmar == 'N');
 		
 		camaroteDisp.get(numCam - 1).visualizar();
+	}
+	@Override
+	public void listarCadastro(Cadastro cadastro) {
+		// TODO Auto-generated method stub
+		
 	}	
 		
 		

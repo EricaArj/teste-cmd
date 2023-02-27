@@ -3,105 +3,86 @@ package show.model;
 import java.time.LocalDate;
 
 public class Cadastro {
-	
-	private long id;
+
     private String nome; 
     private String senha;
     private String cpf;
-    private String sexo;
+    private int tipoSexo;
     private String telefone;
-    private String email;
-    private LocalDate dataNascimento;
-    
-	public Cadastro(long id, String nome, String senha, String cpf, String sexo, String telefone, LocalDate dataNascimento, String email) {
-		this.id = id;
-		this.nome = nome;
-		this.senha = senha;
-		this.cpf = cpf;
-		this.sexo = sexo;
-		this.telefone = telefone;
-		this.dataNascimento = dataNascimento;
-		this.email = email;
-		
-	}
+    private int idade;
 
-	public long getId() {
-		return id;
-	}
+    public Cadastro(String nome, String senha, String cpf, int tipoSexo, String telefone, int idade) {
 
-	public void setId(long id) {
-		this.id = id;
-	}
+        this.nome = nome;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.tipoSexo = tipoSexo;
+        this.telefone = telefone;
+        this.idade = idade;
 
-	public String getNome() {
-		return nome;
-	}
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public String getSexo() {
-		return sexo;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
+    public int getTipoSexo() {
+        return tipoSexo;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public void setTipoSexo(int tipoSexo) {
+        this.tipoSexo = tipoSexo;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    public int getIdade() {
+        return idade;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
     public void visualizar(){
 
-        System.out.println("****************************************");
-        System.out.println("   DADOS DE CADASTRO  ");
-        System.out.println("****************************************");   
+        System.out.println("----------------------------------------");
+        System.out.println("            DADOS DE CADASTRO           ");
+        System.out.println("----------------------------------------");
         System.out.println("Nome: " + this.nome);
         System.out.println("Senha: " + this.senha);
-        System.out.println("Data de nascimento: " + this.dataNascimento);
+        System.out.println("Sua idade: " + this.idade);
         System.out.println("CPF: " + this.cpf);
-        System.out.println("Sexo: " + this.sexo);
+        System.out.println("Sexo: " + this.tipoSexo);
         System.out.println("Telefone: " + this.telefone);
-        System.out.println("Email: " + this.email);
-        
+        System.out.println("----------------------------------------");
+
 
     }
 
