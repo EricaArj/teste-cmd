@@ -1,13 +1,14 @@
 package show.model;
 
-public class ReservaCamaroteTradional extends ReservaCamarote {
+public class ReservaCamaroteTradicional extends ReservaCamarote {
 
 	private float valorDisponivel;
-	
-	public ReservaCamaroteTradional(String nome, int espacoCamorete, String alimento, String bebida,
-			String escolherMusica) {
-		super(nome, espacoCamorete, alimento, bebida, escolherMusica);
-		this.valorDisponivel = valorDisponivel;	
+
+
+	public ReservaCamaroteTradicional(boolean disponibildade, String nome, int espacoCamarote, int tipoPacote,
+			float valorDisponivel) {
+		super(disponibildade, nome, espacoCamarote, tipoPacote);
+		this.valorDisponivel = valorDisponivel;
 	}
 
 	public float getValorDisponivel() {

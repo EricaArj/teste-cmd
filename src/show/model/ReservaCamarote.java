@@ -2,23 +2,44 @@ package show.model;
 
 public abstract class ReservaCamarote {
 	
-	private String nome;
-	private int espacoCamorete;
-	private String alimento;
-	private String bebida;
-	private String escolherMusica;
+	private boolean disponibildade;
+    private String nome;
+    private int espacoCamarote;
+    private int tipoPacote;
 
-	public ReservaCamarote(String nome, int espacoCamorete, String alimento, String bebida, String escolherMusica) {
-		this.nome = nome;
-		this.espacoCamorete = espacoCamorete;
-		this.alimento = alimento;
-		this.bebida = bebida;
-		this.escolherMusica = escolherMusica;
-	}
 	
+
+
+	public ReservaCamarote(boolean disponibildade, String nome, int espacoCamarote, int tipoPacote) {
+	
+		this.disponibildade = disponibildade;
+		this.nome = nome;
+		this.espacoCamarote = espacoCamarote;
+		this.tipoPacote = tipoPacote;
+	}
+
+
+
+
+	public boolean isDisponibildade() {
+		return disponibildade;
+	}
+
+
+
+
+	public void setDisponibildade(boolean disponibildade) {
+		this.disponibildade = disponibildade;
+	}
+
+
+
+
 	public String getNome() {
 		return nome;
 	}
+
+
 
 
 	public void setNome(String nome) {
@@ -26,66 +47,61 @@ public abstract class ReservaCamarote {
 	}
 
 
-	public int getEspacoCamorete() {
-		return espacoCamorete;
-	}
 
-	
-	public void setEspacoCamorete(int espacoCamorete) {
-		this.espacoCamorete = espacoCamorete;
+
+	public int getEspacoCamarote() {
+		return espacoCamarote;
 	}
 
 
-	public String getAlimento() {
-		return alimento;
+
+
+	public void setEspacoCamarote(int espacoCamarote) {
+		this.espacoCamarote = espacoCamarote;
 	}
 
 
-	public void setAlimento(String alimento) {
-		this.alimento = alimento;
+
+
+	public int getTipoPacote() {
+		return tipoPacote;
 	}
 
 
-	public String getBebida() {
-		return bebida;
+
+
+	public void setTipoPacote(int tipoPacote) {
+		this.tipoPacote = tipoPacote;
 	}
 
 
-	public void setBebida(String bebida) {
-		this.bebida = bebida;
-	}
-
-
-	public String getEscolherMusica() {
-		return escolherMusica;
-	}
-
-
-	public void setEscolherMusica(String escolherMusica) {
-		this.escolherMusica = escolherMusica;
-	}
 
 
 	public void visualizar() {
 		
+		String disponibilidade = "";
+
+        if (this.disponibildade == true)
+            disponibilidade = "Disponível";
+        else
+            disponibilidade = "Reservado";
 		String tipo = "";
 		
-		switch(this.espacoCamorete) {		
+		switch(this.tipoPacote) {		
 		case 1 -> tipo = "Reserva Camarote (Especial)";
-		case 2 -> tipo = "Reserva Camarote (Tradional)";
+		case 2 -> tipo = "Reserva Camarote (Tradisonal)";
 		
 	}	
 		
-	
+	//boolean disponibildade, String nome, int espacoCamarote, int tipoPacote
 	System.out.println("#######################");	
 	System.out.println("   RESERVA CAMAROTE    ");	
 	System.out.println("#######################");	
 	System.out.println("Nome: " + this.nome);			
 	System.out.println("Tipo de Reserva Camarote: " + tipo);
-	System.out.println("Escolha o numero do camarote: " + this.espacoCamorete);
-	System.out.println("Informe o Alimento: " + this.alimento);	
-	System.out.println("Qual a Bebida Desejada: " + this.bebida);	
-	System.out.println("Esolha uma música para o Show: " + this.bebida);	
+	System.out.println("Escolha o numero do camarote: " + this.espacoCamarote);
+	System.out.println("Camarotes Disponivel: " + disponibilidade);	
+	System.out.println("########################");
 	
    }
 }

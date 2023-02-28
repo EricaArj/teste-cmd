@@ -2,19 +2,20 @@ package show.model;
 
 public class ReservaCamaroteEspecial extends ReservaCamarote{
 	
-	private int acessoVip;
+	private boolean acessoVip;
 
-	public ReservaCamaroteEspecial(String nome, int espacoCamorete, String alimento, String bebida,
-			String escolherMusica) {
-		super(nome, espacoCamorete, alimento, bebida, escolherMusica);
+
+	public ReservaCamaroteEspecial(boolean disponibildade, String nome, int espacoCamarote, int tipoPacote,
+			boolean acessoVip) {
+		super(disponibildade, nome, espacoCamarote, tipoPacote);
 		this.acessoVip = acessoVip;
 	}
 
-	public int getAcessoVip() {
+	public boolean isAcessoVip() {
 		return acessoVip;
 	}
 
-	public void setAcessoVip(int acessoVip) {
+	public void setAcessoVip(boolean acessoVip) {
 		this.acessoVip = acessoVip;
 	}
 	
