@@ -89,7 +89,7 @@ public class Menu {
 				System.out.println("	 1- LOGIN		    	");
 				System.out.println("	 2- CRIAR CADASTRO		");
 				System.out.println("	 0- Sair				");
-				System.out.println("Entre com a opção desejada:      ");
+				System.out.println("Entre com a opção desejada: ");
 				
 
 				
